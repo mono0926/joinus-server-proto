@@ -89,6 +89,8 @@ namespace JoinProto.Controllers
 
             db.Users.Add(user);
             await db.SaveChangesAsync();
+
+            user.Locations = user.Locations?.Take(10).ToList();
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
