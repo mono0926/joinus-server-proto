@@ -15,3 +15,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#map {
+    margin-top: 10px;
+    height: 50vh;
+    background-color: black;
+}

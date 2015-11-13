@@ -21,7 +21,8 @@ namespace JoinProto.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<User> Users { get; set; }
+        // TODO: new
+        public new DbSet<User> Users { get; set; }
         public DbSet<Location> Locations { get; set; }
 
         public ApplicationDbContext()
