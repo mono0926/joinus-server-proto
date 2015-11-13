@@ -13,6 +13,7 @@ using JoinProto.Models;
 
 namespace JoinProto.Controllers
 {
+    [RoutePrefix("api/locations")]
     public class LocationsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,6 +22,17 @@ namespace JoinProto.Controllers
         public IQueryable<Location> GetLocations()
         {
             return db.Locations;
+        }
+
+        [Route("adjust")]
+        public IHttpActionResult GetAdjustTime(int diff)
+        {
+            foreach (var l in db.Locations.ToList())
+            {
+                l.Time = l.Time.Value.AddHours(diff);
+            }
+            db.SaveChanges();
+            return Ok("ok");
         }
 
         // GET: api/Locations/5
@@ -83,7 +95,8 @@ namespace JoinProto.Controllers
             location.User = await db.Users.FirstOrDefaultAsync(x => x.Id == location.UserId);
             if (!location.Time.HasValue)
             {
-                location.Time = DateTime.Now;
+                var tokyoTZ = TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time");
+                location.Time = DateTime.Now + (tokyoTZ.BaseUtcOffset - TimeZoneInfo.Local.BaseUtcOffset);
             }
 
             db.Locations.Add(location);
