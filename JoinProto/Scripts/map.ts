@@ -11,10 +11,11 @@ function initMap() {
         center: new google.maps.LatLng(35.476415, 139.632694),
         zoom: 8
     });
+    load("hoge");
 }
 
 function load(v: string) {
-    jQuery.getJSON("http://localhost:1235/api/locations", (ls) => {
+    jQuery.getJSON("http://joinproto.azurewebsites.net/api/locations", (ls) => {
 
         for (var i = 0; i < ls.length; i++) {
             var l = ls[i];
