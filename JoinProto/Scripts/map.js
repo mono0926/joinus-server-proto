@@ -1,5 +1,6 @@
 var map;
 var locations;
+var _baseUrl;
 var MapLocation = (function () {
     function MapLocation(latitude, longitude) {
         this.latitude = latitude;
@@ -7,6 +8,9 @@ var MapLocation = (function () {
     }
     return MapLocation;
 })();
+function configure(baseUrl) {
+    _baseUrl = baseUrl;
+}
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(35.476415, 139.632694),
@@ -24,4 +28,3 @@ function load(v) {
         }
     });
 }
-//# sourceMappingURL=map.js.map

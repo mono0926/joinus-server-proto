@@ -1,9 +1,14 @@
 ﻿
 var map;
 var locations: MapLocation[];
+var _baseUrl: string;
 
 class MapLocation {
     constructor(public  latitude: number, public longitude: number) {}
+}
+
+function configure(baseUrl: string) {
+    _baseUrl = baseUrl;
 }
 
 function initMap() {
