@@ -11,9 +11,9 @@ namespace JoinProto
     public static class WebApiConfig
     {
 #if DEBUG
-        public const string BaseUrl = "http://joinproto.azurewebsites.net/api/";
-#else
         public const string BaseUrl = "http://localhost:1235/api/";
+#else
+        public const string BaseUrl = "http://joinproto.azurewebsites.net/api/";
 #endif
 
         public static void Register(HttpConfiguration config)
