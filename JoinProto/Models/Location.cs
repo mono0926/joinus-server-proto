@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace JoinProto.Models
         public double Longitude { get; set; }
         public DateTime? Time { get; set; }
         public int UserId { get; set; }
+        [Required, MinLength(1)]
         public string Type { get; set; }
         [JsonIgnore]
         public virtual User User { get; set; }
