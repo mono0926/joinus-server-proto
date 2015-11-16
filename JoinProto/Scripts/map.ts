@@ -20,7 +20,7 @@ function initMap() {
 }
 
 function load(v: string) {
-    jQuery.getJSON("http://joinproto.azurewebsites.net/api/locations", (ls) => {
+    jQuery.getJSON(_baseUrl + "locations", (ls) => {
 
         for (var i = 0; i < ls.length; i++) {
             var l = ls[i];

@@ -19,7 +19,7 @@ function initMap() {
     load("hoge");
 }
 function load(v) {
-    jQuery.getJSON("http://joinproto.azurewebsites.net/api/locations", function (ls) {
+    jQuery.getJSON(_baseUrl + "locations", function (ls) {
         for (var i = 0; i < ls.length; i++) {
             var l = ls[i];
             var latlng = new google.maps.LatLng(l.Latitude, l.Longitude);
@@ -28,3 +28,4 @@ function load(v) {
         }
     });
 }
+//# sourceMappingURL=map.js.map
