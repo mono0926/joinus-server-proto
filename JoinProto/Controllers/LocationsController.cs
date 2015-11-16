@@ -87,7 +87,7 @@ namespace JoinProto.Controllers
         [ResponseType(typeof(Location))]
         public async Task<IHttpActionResult> PostLocation(Location location)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && location.Type != null)
             {
                 return BadRequest(ModelState);
             }
