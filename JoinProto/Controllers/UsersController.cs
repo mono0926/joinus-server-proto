@@ -18,17 +18,17 @@ namespace JoinProto.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Users
+        // GET: api/AppUsers
         public IQueryable<User> GetUsers()
         {
-            return db.Users;
+            return db.AppUsers;
         }
 
-        // GET: api/Users/5
+        // GET: api/AppUsers/5
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> GetUser(int id)
         {
-            User user = await db.Users.FindAsync(id);
+            User user = await db.AppUsers.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -37,7 +37,7 @@ namespace JoinProto.Controllers
             return Ok(user);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/AppUsers/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutUser(int id, User user)
         {
@@ -72,7 +72,7 @@ namespace JoinProto.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
+        // POST: api/AppUsers
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> PostUser(User user)
         {
@@ -81,30 +81,30 @@ namespace JoinProto.Controllers
                 return BadRequest(ModelState);
             }
 
-            var existing = await db.Users.FirstOrDefaultAsync(x => x.DisplayName == user.DisplayName);
+            var existing = await db.AppUsers.FirstOrDefaultAsync(x => x.DisplayName == user.DisplayName);
             if (existing != null)
             {
                 return CreatedAtRoute("DefaultApi", new { id = existing.Id }, existing);
             }
 
-            db.Users.Add(user);
+            db.AppUsers.Add(user);
             await db.SaveChangesAsync();
 
             user.Locations = user.Locations?.Take(10).ToList();
             return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/AppUsers/5
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> DeleteUser(int id)
         {
-            User user = await db.Users.FindAsync(id);
+            User user = await db.AppUsers.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.AppUsers.Remove(user);
             await db.SaveChangesAsync();
 
             return Ok(user);
@@ -121,7 +121,7 @@ namespace JoinProto.Controllers
 
         private bool UserExists(int id)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            return db.AppUsers.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace JoinProto.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         // TODO: new
-        public new DbSet<User> Users { get; set; }
+        public DbSet<User> AppUsers { get; set; }
         public DbSet<Location> Locations { get; set; }
 
         public ApplicationDbContext()

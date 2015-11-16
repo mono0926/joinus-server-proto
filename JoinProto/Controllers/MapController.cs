@@ -40,7 +40,7 @@ namespace JoinProto.Controllers
         // GET: Map/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "DisplayName");
+            ViewBag.UserId = new SelectList(db.AppUsers, "Id", "DisplayName");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace JoinProto.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "DisplayName", location.UserId);
+            ViewBag.UserId = new SelectList(db.AppUsers, "Id", "DisplayName", location.UserId);
             return View(location);
         }
 
@@ -74,7 +74,7 @@ namespace JoinProto.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "DisplayName", location.UserId);
+            ViewBag.UserId = new SelectList(db.AppUsers, "Id", "DisplayName", location.UserId);
             return View(location);
         }
 
@@ -91,7 +91,7 @@ namespace JoinProto.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "DisplayName", location.UserId);
+            ViewBag.UserId = new SelectList(db.AppUsers, "Id", "DisplayName", location.UserId);
             return View(location);
         }
 

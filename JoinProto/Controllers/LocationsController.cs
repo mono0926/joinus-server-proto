@@ -92,7 +92,7 @@ namespace JoinProto.Controllers
                 return BadRequest(ModelState);
             }
 
-            location.User = await db.Users.FirstOrDefaultAsync(x => x.Id == location.UserId);
+            location.User = await db.AppUsers.FirstOrDefaultAsync(x => x.Id == location.UserId);
             if (!location.Time.HasValue)
             {
                 var tokyoTZ = TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time");
