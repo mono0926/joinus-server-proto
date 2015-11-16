@@ -98,6 +98,10 @@ namespace JoinProto.Controllers
                 var tokyoTZ = TimeZoneInfo.FindSystemTimeZoneById("Tokyo Standard Time");
                 location.Time = DateTime.Now + (tokyoTZ.BaseUtcOffset - TimeZoneInfo.Local.BaseUtcOffset);
             }
+            if (location.Type == null)
+            {
+                location.Type = Location.DefaultType;
+            }
 
             db.Locations.Add(location);
             await db.SaveChangesAsync();
