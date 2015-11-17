@@ -18,7 +18,6 @@ namespace JoinProto.Models
         public int UserId { get; set; }
         [Required, MinLength(1)]
         public string Type { get; set; }
-        [JsonIgnore]
         public virtual User User { get; set; }
     }
 }

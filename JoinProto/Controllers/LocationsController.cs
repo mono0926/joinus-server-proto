@@ -21,7 +21,7 @@ namespace JoinProto.Controllers
         // GET: api/Locations
         public IQueryable<Location> GetLocations()
         {
-            return db.Locations;
+            return db.Locations.Include(x => x.User);
         }
 
         // GET: api/Locations
