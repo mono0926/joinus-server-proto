@@ -1,0 +1,41 @@
+﻿@model JoinProto.Models.Distance
+
+@{
+    ViewBag.Title = "Distance";
+}
+
+<h2>Distance</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Name("FromId")
+        </dt>
+
+        <dd>
+            @Html.TextBox("fromId", Model.From.Id, new { id = "fromId" })
+        </dd>
+        <dt>
+            @Html.Name("ToId")
+        </dt>
+
+        <dd>
+            @Html.TextBox("toId", Model.To.Id, new { id = "toId" })
+        </dd>
+        <dt>
+            @Html.LabelFor(x => x.Interval)
+        </dt>
+
+        <dd>
+            @Html.DisplayTextFor(x => x.IntervalString)
+        </dd>
+
+    </dl>
+
+    <div class="form-horizontal">
+        <input type="submit" value="Submit" />
+    </div>
+}

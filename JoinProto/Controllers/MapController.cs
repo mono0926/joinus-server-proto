@@ -31,6 +31,26 @@ namespace JoinProto.Controllers
         }
 
         // GET: Map/Details/5
+        public async Task<ActionResult> Distance(int? fromId, int? toId)
+        {
+            fromId = fromId ?? 1;
+            toId = toId ?? 2;
+            Location from = await db.Locations.FindAsync(fromId);
+            Location to = await db.Locations.FindAsync(toId);
+            if (from == null)
+            {
+                return HttpNotFound();
+            }
+            return View(new Distance()
+            {
+                From = from,
+                To = to
+            });
+        }
+
+     
+
+        // GET: Map/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)

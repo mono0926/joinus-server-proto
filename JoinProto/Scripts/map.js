@@ -85,3 +85,4 @@ function bindInfoWindow(marker, description) {
         }).open(map, marker);
     });
 }
+//# sourceMappingURL=map.js.map
