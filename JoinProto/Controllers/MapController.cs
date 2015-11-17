@@ -16,10 +16,18 @@ namespace JoinProto.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Map
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string date)
         {
-            var locations = db.Locations.Include(l => l.User);
-            return View(await locations.ToListAsync());
+            ViewBag.Date = date ?? DateTime.Now.ToString("yyyy/MM/dd");
+            DateTime targetDate;
+            
+            var locations = await db.Locations.Include(l => l.User).ToListAsync();
+            if (DateTime.TryParse((ViewBag.Date as String), out targetDate))
+            {
+                locations = locations.Where(x => x.Time.Value.Date == targetDate.Date).ToList();
+            }
+            locations = locations.OrderBy(x => x.UserId).ThenBy(x => x.Time).ToList();
+            return View(locations);
         }
 
         // GET: Map/Details/5

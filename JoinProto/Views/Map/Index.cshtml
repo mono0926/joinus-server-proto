@@ -4,6 +4,14 @@
     ViewBag.Title = "Index";
 }
 
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+                    @Html.TextBox("date", ViewBag.Date as string, new { id = "date" })
+                    <input type="submit" value="Submit" />
+    </div>
+}
+
 <div id="map">
 
 </div>
@@ -11,7 +19,7 @@
 <script src="../../Scripts/map.js" type="text/javascript"></script>
 <script type="text/javascript">
     baseUrl = '@WebApiConfig.BaseUrl';
-    //load("hoge")
+    targetDate = '@ViewBag.Date';
 </script>
 
 <h2>Index</h2>
@@ -22,6 +30,9 @@
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.User.DisplayName)
         </th>
@@ -43,6 +54,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.DisplayName)
             </td>

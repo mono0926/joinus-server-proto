@@ -27,7 +27,14 @@ namespace JoinProto.Controllers
         // GET: api/Locations
         public IQueryable<Location> GetLocations(int userId)
         {
-            return db.Locations.Where(x => x.UserId == userId);
+            return db.Locations.Where(x => x.UserId == userId).Include(x => x.User);
+        }
+
+        // GET: api/Locations
+        public IEnumerable<Location> GetLocations(DateTime date)
+        {
+            var r = db.Locations.Include(x => x.User).ToList().Where(x => x.Time.Value.Date == date.Date);
+            return r;
         }
 
         [Route("adjust")]

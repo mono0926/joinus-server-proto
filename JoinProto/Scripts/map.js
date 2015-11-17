@@ -9,6 +9,7 @@ if (!String.prototype.format) {
 var map;
 var locations;
 var baseUrl;
+var targetDate;
 var colorTable = [
     'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
     'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
@@ -16,19 +17,20 @@ var colorTable = [
     'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
     'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'];
 var MapLocation = (function () {
-    function MapLocation(id, latitude, longitude, type, user) {
+    function MapLocation(id, latitude, longitude, type, time, user) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.type = type;
+        this.time = time;
         this.user = user;
         console.log(this.toString());
     }
     MapLocation.prototype.toString = function () {
-        return "{0}: {1}, {2}<br />type: {3}<br />{4}".format(this.id.toString(), this.latitude.toString(), this.longitude.toString(), this.type, this.user.toString());
+        return "{0}: {1}, {2}<br />type: {3}<br />{4}<br />{5}".format(this.id.toString(), this.latitude.toString(), this.longitude.toString(), this.type, this.user.toString(), this.time.toString());
     };
     MapLocation.fromJson = function (j) {
-        return new MapLocation(j.Id, j.Latitude, j.Longitude, j.Type, User.fromJson(j.User));
+        return new MapLocation(j.Id, j.Latitude, j.Longitude, j.Type, j.Time, User.fromJson(j.User));
     };
     return MapLocation;
 })();
@@ -53,7 +55,11 @@ function initMap() {
     load("hoge");
 }
 function load(v) {
-    jQuery.getJSON(baseUrl + "locations", function (ls) {
+    var url = baseUrl + "locations";
+    if (targetDate != null) {
+        url = "{0}?date={1}".format(url, targetDate);
+    }
+    jQuery.getJSON(url, function (ls) {
         for (var i = 0; i < ls.length; i++) {
             var l = MapLocation.fromJson(ls[i]);
             var latlng = new google.maps.LatLng(l.latitude, l.longitude);
