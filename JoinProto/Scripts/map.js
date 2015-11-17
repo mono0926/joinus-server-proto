@@ -11,11 +11,16 @@ var locations;
 var baseUrl;
 var targetDate;
 var colorTable = [
+    'http://maps.google.com/mapfiles/ms/icons/yellow.png',
+    'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/red.png',
     'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/blue.png',
     'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/green.png',
     'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-    'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
-    'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'];
+    'http://maps.google.com/mapfiles/ms/icons/purple.png',
+    'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'];
 var MapLocation = (function () {
     function MapLocation(id, latitude, longitude, type, time, user) {
         this.id = id;
@@ -67,7 +72,7 @@ function load(v) {
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                icon: colorTable[l.user.id % colorTable.length]
+                icon: colorTable[l.user.id % (colorTable.length / 2) * 2 + (l.type == 'significant_change' ? 0 : 1)]
             });
             bindInfoWindow(marker, l.toString());
         }
@@ -80,4 +85,3 @@ function bindInfoWindow(marker, description) {
         }).open(map, marker);
     });
 }
-//# sourceMappingURL=map.js.map

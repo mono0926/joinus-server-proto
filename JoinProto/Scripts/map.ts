@@ -16,11 +16,16 @@ var locations: MapLocation[];
 var baseUrl: string;
 var targetDate: string;
 var colorTable = [
+    'http://maps.google.com/mapfiles/ms/icons/yellow.png',
+    'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/red.png',
     'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/blue.png',
     'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+    'http://maps.google.com/mapfiles/ms/icons/green.png',
     'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-    'http://maps.google.com/mapfiles/ms/icons/purple-dot.png',
-    'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'];
+    'http://maps.google.com/mapfiles/ms/icons/purple.png',
+    'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'];
 
 class MapLocation {
     constructor(public id: number, public latitude: number, public longitude: number, public type: string, public time: Date, public user: User) {
@@ -74,7 +79,7 @@ function load(v: string) {
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                icon: colorTable[l.user.id % colorTable.length]
+                icon: colorTable[l.user.id % (colorTable.length/2) * 2 + (l.type == 'significant_change' ? 0 : 1)]
             });
             bindInfoWindow(marker, l.toString());
         }
