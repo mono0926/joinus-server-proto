@@ -1,6 +1,6 @@
 var map;
 var locations;
-var _baseUrl;
+var baseUrl;
 var MapLocation = (function () {
     function MapLocation(latitude, longitude) {
         this.latitude = latitude;
@@ -8,9 +8,6 @@ var MapLocation = (function () {
     }
     return MapLocation;
 })();
-function configure(baseUrl) {
-    _baseUrl = baseUrl;
-}
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: new google.maps.LatLng(35.476415, 139.632694),
@@ -19,7 +16,7 @@ function initMap() {
     load("hoge");
 }
 function load(v) {
-    jQuery.getJSON(_baseUrl + "locations", function (ls) {
+    jQuery.getJSON(baseUrl + "locations", function (ls) {
         for (var i = 0; i < ls.length; i++) {
             var l = ls[i];
             var latlng = new google.maps.LatLng(l.Latitude, l.Longitude);

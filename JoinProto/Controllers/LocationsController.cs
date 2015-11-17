@@ -24,6 +24,12 @@ namespace JoinProto.Controllers
             return db.Locations;
         }
 
+        // GET: api/Locations
+        public IQueryable<Location> GetLocations(int userId)
+        {
+            return db.Locations.Where(x => x.UserId == userId);
+        }
+
         [Route("adjust")]
         public IHttpActionResult GetAdjustTime(int diff)
         {

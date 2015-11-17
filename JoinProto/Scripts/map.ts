@@ -1,14 +1,10 @@
 ﻿
 var map;
 var locations: MapLocation[];
-var _baseUrl: string;
+var baseUrl: string;
 
 class MapLocation {
     constructor(public  latitude: number, public longitude: number) {}
-}
-
-function configure(baseUrl: string) {
-    _baseUrl = baseUrl;
 }
 
 function initMap() {
@@ -20,7 +16,7 @@ function initMap() {
 }
 
 function load(v: string) {
-    jQuery.getJSON(_baseUrl + "locations", (ls) => {
+    jQuery.getJSON(baseUrl + "locations", (ls) => {
 
         for (var i = 0; i < ls.length; i++) {
             var l = ls[i];
