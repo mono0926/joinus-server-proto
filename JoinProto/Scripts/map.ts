@@ -54,15 +54,16 @@ class User {
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: new google.maps.LatLng(35.476415, 139.632694),
-        zoom: 8
+        center: new google.maps.LatLng(35.65597440083904, 139.6530764476981),
+        zoom: 10
     });
     load("hoge");
 }
 
 function load(v: string) {
+    locations = [];
     var url = baseUrl + "locations";
-    if (targetDate != null) {
+    if (targetDate != null && targetDate.length > 0) {
         url = "{0}?date={1}".format(url, targetDate);
     }
     jQuery.getJSON(url, (ls) => {
@@ -72,17 +73,19 @@ function load(v: string) {
             var latlng = new google.maps.LatLng(l.latitude, l.longitude);
             var marker = new google.maps.Marker({
                 position: latlng,
-                map: map, title: l.type,
+                map: map,
                 icon: colorTable[l.user.id % colorTable.length]
             });
-            google.maps.event.addListener(marker, 'click', event => {
-                new google.maps.InfoWindow({
-                    content: l.toString()
-                    
-                }).open(marker.getMap(), marker);
-            });
-            console.log(marker);
+            bindInfoWindow(marker, l.toString());
         }
+    });
+}
+
+function bindInfoWindow(marker: google.maps.Marker, description: string) {
+    google.maps.event.addListener(marker, 'click', () => {
+        new google.maps.InfoWindow({
+            content:description
+        }).open(map, marker);
     });
 }
 
